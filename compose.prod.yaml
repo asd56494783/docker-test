@@ -1,0 +1,36 @@
+services:
+  app:
+    image: sean0705/dockertest-app:1.0.2
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/member_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
+      SPRING_DATASOURCE_USERNAME: member_user
+      SPRING_DATASOURCE_PASSWORD: member_password
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.4
+    container_name: dockertest-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: member_db
+      MYSQL_USER: member_user
+      MYSQL_PASSWORD: member_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  mysql-data:

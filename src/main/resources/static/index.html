@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member List Practice</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg-top: #f8f4ea;
+            --bg-bottom: #e6dbc8;
+            --panel: rgba(255, 251, 244, 0.94);
+            --text: #1f2937;
+            --accent: #0f766e;
+            --line: #d7cbb4;
+            --chip: #e6f4f2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 30%),
+                linear-gradient(145deg, var(--bg-top), var(--bg-bottom));
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        main {
+            width: min(860px, 100%);
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 42px;
+            box-shadow: 0 20px 60px rgba(31, 41, 55, 0.12);
+        }
+
+        h1 {
+            margin: 10px 0 16px;
+            font-size: clamp(2.1rem, 5vw, 4rem);
+            line-height: 1.05;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: 1.04rem;
+        }
+
+        .eyebrow {
+            margin: 0;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+            margin-top: 28px;
+        }
+
+        .card {
+            border-radius: 20px;
+            border: 1px solid var(--line);
+            background: white;
+            padding: 22px;
+        }
+
+        code {
+            display: inline-block;
+            background: var(--chip);
+            border-radius: 999px;
+            padding: 4px 10px;
+            margin-top: 8px;
+        }
+
+        ul {
+            padding-left: 18px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <p class="eyebrow">Spring Boot Practice</p>
+    <h1>會員清單分層練習專案</h1>
+    <p>這個版本把範例改成 member list，讓你可以直接觀察 Controller 怎麼呼叫 Service，並從 API 回傳會員資料。</p>
+
+    <div class="grid">
+        <section class="card">
+            <h2>練習重點</h2>
+            <ul>
+                <li>Controller 負責接收請求</li>
+                <li>Service 負責整理商業邏輯</li>
+                <li>例外處理集中在 Advice</li>
+            </ul>
+        </section>
+        <section class="card">
+            <h2>可測試 API</h2>
+            <p>查全部會員</p>
+            <code>GET /api/members</code>
+            <p>查單一會員</p>
+            <code>GET /api/members/1</code>
+        </section>
+    </div>
+</main>
+</body>
+</html>
